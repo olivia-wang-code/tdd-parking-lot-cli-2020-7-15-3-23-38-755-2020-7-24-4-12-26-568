@@ -2,7 +2,7 @@ package com.oocl.cultivation;
 
 public class ParkingBoy {
     public Ticket parkCar(){
-        return new Ticket("01");
+        return new Ticket().generateTicket();
     }
 
 

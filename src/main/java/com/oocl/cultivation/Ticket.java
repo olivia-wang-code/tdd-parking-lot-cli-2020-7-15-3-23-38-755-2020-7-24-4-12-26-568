@@ -1,17 +1,26 @@
 package com.oocl.cultivation;
 
+import java.util.Random;
+
 public class Ticket {
-    private String id;
+    private int id;
 
-    public Ticket(String id) {
+    public Ticket(int id) {
         this.id = id;
     }
 
-    public void setId(String id) {
+    public Ticket() {
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
+    }
+
+    public Ticket generateTicket(){
+        return new Ticket(new Random().nextInt(100));
     }
 }
