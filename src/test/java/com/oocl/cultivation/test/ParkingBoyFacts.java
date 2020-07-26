@@ -117,4 +117,22 @@ class ParkingBoyFacts {
         assertEquals(null, car);
     }
 
+    @Test
+    void should_return_false_when_park_car_given_parkingcar_more_than_10() {
+        //given
+        ParkingBoy parkingBoy=new ParkingBoy();
+        ParkingLot parkingLot=new ParkingLot();
+        for(int i=1;i<11;i++) {
+            Car car=new Car(i);
+            parkingBoy.parkCar(parkingLot,car);
+        }
+
+        //when
+        Car car=new Car(11);
+        parkingBoy.parkCar(parkingLot,car);
+
+        //then
+        assertEquals(10, parkingLot.getParkingCarMap().size());
+    }
+
 }
