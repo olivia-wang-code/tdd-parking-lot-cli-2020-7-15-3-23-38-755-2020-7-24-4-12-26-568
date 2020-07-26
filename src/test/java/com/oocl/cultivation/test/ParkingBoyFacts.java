@@ -148,15 +148,13 @@ class ParkingBoyFacts {
         assertThrows(WrongTicketException.class, () -> parkingBoy.getCarByTicket(parkingLot, errorTicket));
     }
     @Test
-    void should_throw_null_ticket_exception_when_get_car_given_null_ticket() {
+    void should_throw_null_ticket_exception_when_get_car_given_null_ticket() throws WrongTicketException {
         //given
         ParkingLot parkingLot = new ParkingLot();
-
-        //when
-        Car car = parkingLot.getParkingCarMap().get(new Ticket());
+        ParkingBoy parkingBoy = new ParkingBoy();
 
         //then
-        assertThrows(NullTicketException.class,()-> parkingLot.getParkingCarMap().get(new Ticket()));
+        assertThrows(NullTicketException.class,()-> parkingBoy.getCarByTicket(parkingLot, new Ticket()));
     }
 
 
