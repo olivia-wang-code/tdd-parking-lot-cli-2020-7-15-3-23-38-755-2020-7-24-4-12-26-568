@@ -13,19 +13,30 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class ParkingBoyFacts {
     @Test
     void should_return_ticket_when_park_given_car() {
+        //given
         Car car = new Car(1);
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot();
 
-        assertEquals(new Ticket(1).getId(), parkingBoy.parkCar(parkingLot, car).getId());
+        //when
+        Ticket ticket = parkingBoy.parkCar(parkingLot, car);
+
+        //then
+        assertEquals(new Ticket(1).getId(), ticket.getId());
     }
 
     @Test
     void should_return_car_when_get_car_given_ticket() {
+        //given
         Car car = new Car(1);
         ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
 
-        assertEquals(car.getId(), parkingBoy.getCarByTicket(new ParkingLot(),new Ticket(car)).getId());
+        //when
+        Ticket ticket = parkingBoy.parkCar(parkingLot, car);
+
+        //then
+        assertEquals(car.getId(), parkingBoy.getCarByTicket(parkingLot, ticket).getId());
     }
 
     @Test
