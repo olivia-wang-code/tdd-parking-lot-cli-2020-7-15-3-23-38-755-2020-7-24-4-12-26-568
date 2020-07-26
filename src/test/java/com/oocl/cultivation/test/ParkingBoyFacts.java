@@ -14,8 +14,9 @@ class ParkingBoyFacts {
     void should_return_ticket_when_park_given_car() {
         Car car = new Car(1);
         ParkingBoy parkingBoy=new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
 
-        assertEquals(new Ticket(1).getId(), parkingBoy.parkCar(car).getId());
+        assertEquals(new Ticket(1).getId(), parkingBoy.parkCar(parkingLot, car).getId());
     }
     @Test
     void should_return_car_when_get_car_given_ticket() {
@@ -34,8 +35,8 @@ class ParkingBoyFacts {
         ParkingLot parkingLot = new ParkingLot();
 
         //when
-        parkingBoy.parkCar(theFirstCar);
-        parkingBoy.parkCar(theSecondCar);
+        parkingBoy.parkCar(parkingLot, theFirstCar);
+        parkingBoy.parkCar(parkingLot, theSecondCar);
 
         //then
         assertEquals(2, parkingLot.getParkingCarMap().size());
