@@ -1,15 +1,16 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.NotEnoughSeatException;
 import com.oocl.cultivation.exception.NullTicketException;
 import com.oocl.cultivation.exception.WrongTicketException;
 
 public class ParkingBoy {
-    public Ticket parkCar(ParkingLot parkingLot, Car car){
+    public Ticket parkCar(ParkingLot parkingLot, Car car) throws NotEnoughSeatException {
         Ticket ticket = new Ticket(car);
         if(parkingLot.getParkingCarMap().size()<10){
             parkingLot.getParkingCarMap().put(ticket, car);
         }else{
-            return null;
+            throw new NotEnoughSeatException("Î»ÖÃ²»×ã");
         }
         return ticket;
     }

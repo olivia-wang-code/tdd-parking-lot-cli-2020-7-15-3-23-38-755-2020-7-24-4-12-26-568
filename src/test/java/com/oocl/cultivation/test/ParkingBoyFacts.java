@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyFacts {
     @Test
-    void should_return_ticket_when_park_given_car() {
+    void should_return_ticket_when_park_given_car() throws NotEnoughSeatException {
         //given
         Car car = new Car(1);
         ParkingBoy parkingBoy = new ParkingBoy();
@@ -41,7 +41,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_ticket_when_parking_given_more_cars() {
+    void should_return_ticket_when_parking_given_more_cars() throws NotEnoughSeatException {
         //given
         Car theFirstCar = new Car(1);
         Car theSecondCar = new Car(2);
@@ -58,7 +58,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_car_when_get_cars_given_tickets() {
+    void should_return_car_when_get_cars_given_tickets() throws NotEnoughSeatException {
         //given
         Car theFirstCar = new Car(1);
         Car theSecondCar = new Car(2);
@@ -76,7 +76,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_none_car_when_get_car_given_false_ticket() {
+    void should_return_none_car_when_get_car_given_false_ticket() throws NotEnoughSeatException {
         //given
         Car theFirstCar = new Car(1);
         Car theSecondCar = new Car(2);
@@ -116,7 +116,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_false_when_park_car_given_parkingcar_more_than_10() {
+    void should_return_false_when_park_car_given_parkingcar_more_than_10() throws NotEnoughSeatException {
         //given
         ParkingBoy parkingBoy=new ParkingBoy();
         ParkingLot parkingLot=new ParkingLot();
@@ -127,13 +127,12 @@ class ParkingBoyFacts {
 
         //when
         Car car=new Car(11);
-        parkingBoy.parkCar(parkingLot,car);
 
         //then
-        assertEquals(10, parkingLot.getParkingCarMap().size());
+        assertThrows(NotEnoughSeatException.class,()-> parkingBoy.parkCar(parkingLot,car));
     }
     @Test
-    void should_throw_wrong_ticket_exception_when_get_car_given_false_ticket() {
+    void should_throw_wrong_ticket_exception_when_get_car_given_false_ticket() throws NotEnoughSeatException {
         //given
         Car car = new Car(1);
 
@@ -157,7 +156,7 @@ class ParkingBoyFacts {
         assertThrows(NullTicketException.class,()-> parkingBoy.getCarByTicket(parkingLot, new Ticket()));
     }
     @Test
-    void should_throw_not_enough_seat_exception_when_park_car_given_parkingcar_more_than_10() {
+    void should_throw_not_enough_seat_exception_when_park_car_given_parkingcar_more_than_10() throws NotEnoughSeatException {
         //given
         ParkingBoy parkingBoy=new ParkingBoy();
         ParkingLot parkingLot=new ParkingLot();
