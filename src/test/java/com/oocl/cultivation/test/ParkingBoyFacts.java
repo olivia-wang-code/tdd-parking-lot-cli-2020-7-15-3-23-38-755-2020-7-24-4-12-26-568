@@ -228,4 +228,26 @@ class ParkingBoyFacts {
         //then
         assertEquals(2, parkinglots.get(1).getParkingCarMap().size());
     }
+    @Test
+    void should_return_second_parking_lot_when_parking_one_car_given_second_has_more_available_seats_than_first() throws NotEnoughSeatException {
+        //given
+        ParkingLot firstParkingLot=new ParkingLot();
+        ParkingLot secondParkingLot=new ParkingLot();
+        List<ParkingLot> parkinglots=new ArrayList<>();
+        ParkingBoy parkingBoy=new ParkingBoy();
+        parkinglots.add(firstParkingLot);
+        parkinglots.add(secondParkingLot);
+        for (int i = 0; i < 5; i++) {
+            firstParkingLot.getParkingCarMap().put(new Ticket(),new Car(i));
+        }
+        secondParkingLot.getParkingCarMap().put(new Ticket(),new Car(6));
+
+
+        //when
+
+        parkingBoy.parkCar(parkinglots,new Car(7));
+
+        //then
+        assertEquals(2,secondParkingLot.getParkingCarMap().size());
+    }
 }
