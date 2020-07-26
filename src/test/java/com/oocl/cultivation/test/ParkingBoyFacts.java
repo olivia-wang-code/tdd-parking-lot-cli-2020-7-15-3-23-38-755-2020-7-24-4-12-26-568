@@ -2,14 +2,12 @@ package com.oocl.cultivation.test;
 
 import com.oocl.cultivation.Car;
 import com.oocl.cultivation.ParkingBoy;
+import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class ParkingBoyFacts {
     @Test
@@ -25,6 +23,22 @@ class ParkingBoyFacts {
         ParkingBoy parkingBoy=new ParkingBoy();
 
         assertEquals(car.getId(), parkingBoy.getCarByTicket(new Ticket(car)).getId());
+    }
+    @Test
+    void should_return_ticket_when_parking_given_more_cars(){
+        //given
+        Car theFirstCar =new Car(1);
+        Car theSecondCar=new Car(2);
+
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+
+        //when
+        parkingBoy.parkCar(theFirstCar);
+        parkingBoy.parkCar(theSecondCar);
+
+        //then
+        assertEquals(2, parkingLot.getParkingCarMap().size());
     }
 
 }
