@@ -1,5 +1,6 @@
 package com.oocl.cultivation.test;
 
+import com.oocl.cultivation.Car;
 import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.Ticket;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,13 @@ class ParkingBoyFacts {
         Ticket ticket = new Ticket(1);
 
         assertEquals(ticket.getId(), parkingBoy.parkCar().getId());
+    }
+    @Test
+    void should_return_car_when_get_car_given_ticket() {
+        Car car = new Car(1);
+        ParkingBoy parkingBoy=new ParkingBoy();
+
+        assertEquals(car.getId(), parkingBoy.getCarByTicket(new Ticket(car)).getId());
     }
 
 }

@@ -4,9 +4,13 @@ import java.util.Random;
 
 public class Ticket {
     private int id;
-
+    private Car car;
     public Ticket(int id) {
         this.id = id;
+    }
+
+    public Ticket(Car car){
+        this.id=car.getId();
     }
 
     public Ticket() {
