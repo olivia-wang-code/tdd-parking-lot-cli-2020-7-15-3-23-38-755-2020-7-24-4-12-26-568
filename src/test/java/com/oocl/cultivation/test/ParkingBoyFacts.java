@@ -4,11 +4,11 @@ import com.oocl.cultivation.Car;
 import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
+import com.oocl.cultivation.exception.WrongTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyFacts {
     @Test
@@ -26,7 +26,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_car_when_get_car_given_ticket() {
+    void should_return_car_when_get_car_given_ticket() throws Exception {
         //given
         Car car = new Car(1);
         ParkingBoy parkingBoy = new ParkingBoy();
@@ -103,7 +103,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_none_car_when_get_car_given_used_ticket() {
+    void should_return_none_car_when_get_car_given_used_ticket() throws Exception {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot();
@@ -133,6 +133,21 @@ class ParkingBoyFacts {
 
         //then
         assertEquals(10, parkingLot.getParkingCarMap().size());
+    }
+    @Test
+    void should_return_message_when_get_car_given_false_ticket() {
+        //given
+        Car car = new Car(1);
+
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+
+        //when
+        parkingBoy.parkCar(parkingLot, car);
+        Ticket errorTicket = new Ticket();
+
+        //then
+        assertThrows(WrongTicketException.class, () -> parkingBoy.getCarByTicket(parkingLot, errorTicket));
     }
 
 }
