@@ -1,5 +1,7 @@
 package com.oocl.cultivation;
 
+import com.oocl.cultivation.exception.WrongTicketException;
+
 public class ParkingBoy {
     public Ticket parkCar(ParkingLot parkingLot, Car car){
         Ticket ticket = new Ticket(car);
@@ -10,9 +12,12 @@ public class ParkingBoy {
         }
         return ticket;
     }
-    public Car getCarByTicket(ParkingLot parkingLot, Ticket ticket){
+    public Car getCarByTicket(ParkingLot parkingLot, Ticket ticket) throws WrongTicketException {
         //暂时存car,remove删除map里的ticket：car
         Car car = parkingLot.getParkingCarMap().get(ticket);
+        if(car==null){
+            throw new WrongTicketException("无法识别的停车罚单");
+        }
         parkingLot.getParkingCarMap().remove(ticket);
         return car;
     }

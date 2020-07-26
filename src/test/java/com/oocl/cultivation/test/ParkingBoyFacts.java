@@ -110,11 +110,8 @@ class ParkingBoyFacts {
         Ticket ticket = parkingBoy.parkCar(parkingLot, new Car(1));
         parkingBoy.getCarByTicket(parkingLot,ticket);
 
-        //when
-        Car car = parkingBoy.getCarByTicket(parkingLot,ticket);
-
         //then
-        assertEquals(null, car);
+        assertThrows(WrongTicketException.class, () -> parkingBoy.getCarByTicket(parkingLot,ticket));
     }
 
     @Test
