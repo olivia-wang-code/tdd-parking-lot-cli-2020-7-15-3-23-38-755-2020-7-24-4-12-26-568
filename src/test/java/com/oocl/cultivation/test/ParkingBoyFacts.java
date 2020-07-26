@@ -18,7 +18,7 @@ class ParkingBoyFacts {
         Car car = new Car(1);
         ParkingBoy parkingBoy = new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
         //when
         Ticket ticket = parkingBoy.parkCar(parkingLots, car);
@@ -33,7 +33,7 @@ class ParkingBoyFacts {
         Car car = new Car(1);
         ParkingBoy parkingBoy = new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
         //when
         Ticket ticket = parkingBoy.parkCar(parkingLots, car);
@@ -50,7 +50,7 @@ class ParkingBoyFacts {
 
         ParkingBoy parkingBoy = new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
 
         //when
@@ -69,7 +69,7 @@ class ParkingBoyFacts {
 
         ParkingBoy parkingBoy = new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
 
         //when
@@ -89,7 +89,7 @@ class ParkingBoyFacts {
 
         ParkingBoy parkingBoy = new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
 
         //when
@@ -102,7 +102,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_none_car_when_get_car_given_null_ticket() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
 
         //when
         Car car = parkingLot.getParkingCarMap().get(new Ticket());
@@ -116,7 +116,7 @@ class ParkingBoyFacts {
         //given
         ParkingBoy parkingBoy = new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
         Ticket ticket = parkingBoy.parkCar(parkingLots, new Car(1));
         parkingBoy.getCarByTicket(parkingLot,ticket);
@@ -130,7 +130,7 @@ class ParkingBoyFacts {
         //given
         ParkingBoy parkingBoy=new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
         for(int i=1;i<11;i++) {
             Car car=new Car(i);
@@ -150,7 +150,7 @@ class ParkingBoyFacts {
 
         ParkingBoy parkingBoy = new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
 
         //when
@@ -163,7 +163,7 @@ class ParkingBoyFacts {
     @Test
     void should_throw_null_ticket_exception_when_get_car_given_null_ticket() throws WrongTicketException {
         //given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         ParkingBoy parkingBoy = new ParkingBoy();
 
         //then
@@ -174,7 +174,7 @@ class ParkingBoyFacts {
         //given
         ParkingBoy parkingBoy=new ParkingBoy();
         List<ParkingLot> parkingLots=new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
         for(int i=1;i<11;i++) {
             Car car=new Car(i);
@@ -191,8 +191,8 @@ class ParkingBoyFacts {
     void should_return_the_11th_car_in_parking_lot_2_when_parking_car_given_parkingcar_more_than_10() throws NotEnoughSeatException {
         //given
         ParkingBoy parkingBoy=new ParkingBoy();
-        ParkingLot firstParkingLot=new ParkingLot();
-        ParkingLot secondParkingLot=new ParkingLot();
+        ParkingLot firstParkingLot=new ParkingLot(10);
+        ParkingLot secondParkingLot=new ParkingLot(10);
         List<ParkingLot> parkingLots=new ArrayList<>();
         parkingLots.add(firstParkingLot);
         parkingLots.add(secondParkingLot);
@@ -213,8 +213,8 @@ class ParkingBoyFacts {
             throws NotEnoughSeatException {
         //given
         SmartParkingBoy smartParkingBoy=new SmartParkingBoy();
-        ParkingLot firstParkingLot=new ParkingLot();
-        ParkingLot secondParkingLot=new ParkingLot();
+        ParkingLot firstParkingLot=new ParkingLot(10);
+        ParkingLot secondParkingLot=new ParkingLot(10);
         firstParkingLot.getParkingCarMap().put(new Ticket(1),new Car(1));
         firstParkingLot.getParkingCarMap().put(new Ticket(2),new Car(2));
         secondParkingLot.getParkingCarMap().put(new Ticket(3),new Car(3));
@@ -231,21 +231,21 @@ class ParkingBoyFacts {
     @Test
     void should_return_second_parking_lot_when_parking_one_car_given_second_has_more_available_seats_than_first() throws NotEnoughSeatException {
         //given
-        ParkingLot firstParkingLot=new ParkingLot();
-        ParkingLot secondParkingLot=new ParkingLot();
+        ParkingLot firstParkingLot=new ParkingLot(10);
+        ParkingLot secondParkingLot=new ParkingLot(5);
         List<ParkingLot> parkinglots=new ArrayList<>();
-        ParkingBoy parkingBoy=new ParkingBoy();
-        parkinglots.add(firstParkingLot);
-        parkinglots.add(secondParkingLot);
+        SuperSmartParkingBoy superSmartParkingBoy=new SuperSmartParkingBoy();
+
         for (int i = 0; i < 5; i++) {
             firstParkingLot.getParkingCarMap().put(new Ticket(),new Car(i));
         }
         secondParkingLot.getParkingCarMap().put(new Ticket(),new Car(6));
-
+        parkinglots.add(firstParkingLot);
+        parkinglots.add(secondParkingLot);
 
         //when
 
-        parkingBoy.parkCar(parkinglots,new Car(7));
+        superSmartParkingBoy.parkCar(parkinglots,new Car(7));
 
         //then
         assertEquals(2,secondParkingLot.getParkingCarMap().size());
