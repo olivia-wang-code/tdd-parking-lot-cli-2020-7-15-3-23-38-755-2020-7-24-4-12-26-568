@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ParkingBoyFacts {
     @Test
@@ -57,6 +58,32 @@ class ParkingBoyFacts {
         //then
         assertEquals(theFirstCar.getId(), parkingLot.getParkingCarMap().get(theFirstCarTicket).getId());
         assertEquals(theSecondCar.getId(), parkingLot.getParkingCarMap().get(theSecondCarTicket).getId());
+    }
+    @Test
+    void should_return_none_car_when_get_car_given_false_ticket() {
+        //given
+        Car theFirstCar =new Car(1);
+        Car theSecondCar=new Car(2);
+
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+
+        //when
+        Ticket theSecondCarTicket = parkingBoy.parkCar(parkingLot, theSecondCar);
+
+        //then
+        assertNotEquals(theFirstCar.getId(), parkingLot.getParkingCarMap().get(theSecondCarTicket).getId());
+    }
+    @Test
+    void should_return_none_car_when_get_car_given_null_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+
+        //when
+        Car car = parkingLot.getParkingCarMap().get(new Ticket());
+
+        //then
+        assertEquals(null, car);
     }
 
 
