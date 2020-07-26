@@ -4,6 +4,7 @@ import com.oocl.cultivation.Car;
 import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
+import com.oocl.cultivation.exception.NotEnoughSeatException;
 import com.oocl.cultivation.exception.NullTicketException;
 import com.oocl.cultivation.exception.WrongTicketException;
 import org.junit.jupiter.api.Test;
@@ -155,6 +156,21 @@ class ParkingBoyFacts {
         //then
         assertThrows(NullTicketException.class,()-> parkingBoy.getCarByTicket(parkingLot, new Ticket()));
     }
+    @Test
+    void should_throw_not_enough_seat_exception_when_park_car_given_parkingcar_more_than_10() {
+        //given
+        ParkingBoy parkingBoy=new ParkingBoy();
+        ParkingLot parkingLot=new ParkingLot();
+        for(int i=1;i<11;i++) {
+            Car car=new Car(i);
+            parkingBoy.parkCar(parkingLot,car);
+        }
 
+        //when
+        Car car=new Car(11);
+
+        //then
+        assertThrows(NotEnoughSeatException.class, ()->parkingBoy.parkCar(parkingLot,car));
+    }
 
 }
