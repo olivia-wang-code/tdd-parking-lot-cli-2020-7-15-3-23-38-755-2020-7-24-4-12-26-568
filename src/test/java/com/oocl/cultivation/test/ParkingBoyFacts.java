@@ -4,6 +4,7 @@ import com.oocl.cultivation.Car;
 import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
+import com.oocl.cultivation.exception.NullTicketException;
 import com.oocl.cultivation.exception.WrongTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -132,7 +133,7 @@ class ParkingBoyFacts {
         assertEquals(10, parkingLot.getParkingCarMap().size());
     }
     @Test
-    void should_return_message_when_get_car_given_false_ticket() {
+    void should_throw_wrong_ticket_exception_when_get_car_given_false_ticket() {
         //given
         Car car = new Car(1);
 
@@ -146,5 +147,17 @@ class ParkingBoyFacts {
         //then
         assertThrows(WrongTicketException.class, () -> parkingBoy.getCarByTicket(parkingLot, errorTicket));
     }
+    @Test
+    void should_throw_null_ticket_exception_when_get_car_given_null_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+
+        //when
+        Car car = parkingLot.getParkingCarMap().get(new Ticket());
+
+        //then
+        assertThrows(NullTicketException.class,()-> parkingLot.getParkingCarMap().get(new Ticket()));
+    }
+
 
 }
