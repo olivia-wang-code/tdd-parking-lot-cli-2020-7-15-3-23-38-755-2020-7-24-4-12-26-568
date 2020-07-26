@@ -9,12 +9,13 @@ import java.util.List;
 public class ParkingBoy {
     public Ticket parkCar(List<ParkingLot> parkingLots, Car car) throws NotEnoughSeatException {
         Ticket ticket = new Ticket(car);
-        if(parkingLots.get(0).getParkingCarMap().size()<10){
-            parkingLots.get(0).getParkingCarMap().put(ticket, car);
-        }else{
-            throw new NotEnoughSeatException("位置不足");
+        for(int i = 0;i < parkingLots.size();i++) {
+            if(parkingLots.get(i).getParkingCarMap().size()<10){
+                parkingLots.get(i).getParkingCarMap().put(ticket, car);
+                return ticket;
+            }
         }
-        return ticket;
+        throw new NotEnoughSeatException("位置不足");
     }
     public Car getCarByTicket(ParkingLot parkingLot, Ticket ticket) throws Exception {
         if(ticket.getId() == 0){
