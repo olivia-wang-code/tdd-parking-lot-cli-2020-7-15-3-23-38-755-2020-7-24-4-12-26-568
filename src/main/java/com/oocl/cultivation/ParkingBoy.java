@@ -3,7 +3,11 @@ package com.oocl.cultivation;
 public class ParkingBoy {
     public Ticket parkCar(ParkingLot parkingLot, Car car){
         Ticket ticket = new Ticket(car);
-        parkingLot.getParkingCarMap().put(ticket, car);
+        if(parkingLot.getParkingCarMap().size()<10){
+            parkingLot.getParkingCarMap().put(ticket, car);
+        }else{
+            return null;
+        }
         return ticket;
     }
     public Car getCarByTicket(ParkingLot parkingLot, Ticket ticket){
