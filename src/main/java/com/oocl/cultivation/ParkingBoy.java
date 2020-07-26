@@ -6,8 +6,11 @@ public class ParkingBoy {
         parkingLot.getParkingCarMap().put(ticket, car);
         return ticket;
     }
-    public Car getCarByTicket(Ticket ticket){
-        return new Car(ticket.getId());
+    public Car getCarByTicket(ParkingLot parkingLot, Ticket ticket){
+        //ÔİÊ±´æcar,removeÉ¾³ımapÀïµÄticket£ºcar
+        Car car = parkingLot.getParkingCarMap().get(ticket);
+        parkingLot.getParkingCarMap().remove(ticket);
+        return car;
     }
 
 }

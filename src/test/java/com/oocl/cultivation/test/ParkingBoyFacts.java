@@ -25,7 +25,7 @@ class ParkingBoyFacts {
         Car car = new Car(1);
         ParkingBoy parkingBoy = new ParkingBoy();
 
-        assertEquals(car.getId(), parkingBoy.getCarByTicket(new Ticket(car)).getId());
+        assertEquals(car.getId(), parkingBoy.getCarByTicket(new ParkingLot(),new Ticket(car)).getId());
     }
 
     @Test
@@ -97,10 +97,10 @@ class ParkingBoyFacts {
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot();
         Ticket ticket = parkingBoy.parkCar(parkingLot, new Car(1));
-        parkingBoy.getCarByTicket(ticket);
+        parkingBoy.getCarByTicket(parkingLot,ticket);
 
         //when
-        Car car = parkingBoy.getCarByTicket(ticket);
+        Car car = parkingBoy.getCarByTicket(parkingLot,ticket);
 
         //then
         assertEquals(null, car);
