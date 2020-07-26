@@ -41,5 +41,23 @@ class ParkingBoyFacts {
         //then
         assertEquals(2, parkingLot.getParkingCarMap().size());
     }
+    @Test
+    void should_return_car_when_get_cars_given_tickets() {
+        //given
+        Car theFirstCar =new Car(1);
+        Car theSecondCar=new Car(2);
+
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot = new ParkingLot();
+
+        //when
+        Ticket theFirstCarTicket = parkingBoy.parkCar(parkingLot, theFirstCar);
+        Ticket theSecondCarTicket = parkingBoy.parkCar(parkingLot, theSecondCar);
+
+        //then
+        assertEquals(theFirstCar.getId(), parkingLot.getParkingCarMap().get(theFirstCarTicket).getId());
+        assertEquals(theSecondCar.getId(), parkingLot.getParkingCarMap().get(theSecondCarTicket).getId());
+    }
+
 
 }
