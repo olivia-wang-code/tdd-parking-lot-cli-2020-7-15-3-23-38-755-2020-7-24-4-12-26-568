@@ -1,9 +1,6 @@
 package com.oocl.cultivation.test;
 
-import com.oocl.cultivation.Car;
-import com.oocl.cultivation.ParkingBoy;
-import com.oocl.cultivation.ParkingLot;
-import com.oocl.cultivation.Ticket;
+import com.oocl.cultivation.*;
 import com.oocl.cultivation.exception.NotEnoughSeatException;
 import com.oocl.cultivation.exception.NullTicketException;
 import com.oocl.cultivation.exception.WrongTicketException;
@@ -210,5 +207,25 @@ class ParkingBoyFacts {
 
         //then
         assertEquals(car.getId(), secondParkingLot.getParkingCarMap().get(ticket).getId());
+    }
+    @Test
+    void should_return_second_parking_lot_when_parking_4th_car_given_there_is_2_cars_in_first_parking_lot_and_1_car_in_second_parking_lot()
+            throws NotEnoughSeatException {
+        //given
+        SmartParkingBoy smartParkingBoy=new SmartParkingBoy();
+        ParkingLot firstParkingLot=new ParkingLot();
+        ParkingLot secondParkingLot=new ParkingLot();
+        firstParkingLot.getParkingCarMap().put(new Ticket(1),new Car(1));
+        firstParkingLot.getParkingCarMap().put(new Ticket(2),new Car(2));
+        secondParkingLot.getParkingCarMap().put(new Ticket(3),new Car(3));
+        List<ParkingLot> parkinglots=new ArrayList<>();
+        parkinglots.add(firstParkingLot);
+        parkinglots.add(secondParkingLot);
+
+        //when
+        Car car=new Car(4);
+        smartParkingBoy.parkCar(parkinglots,car);
+        //then
+        assertEquals(2, parkinglots.get(1).getParkingCarMap().size());
     }
 }
