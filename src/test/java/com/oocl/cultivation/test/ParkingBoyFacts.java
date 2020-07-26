@@ -6,7 +6,6 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.Ticket;
 import com.oocl.cultivation.exception.NullTicketException;
 import com.oocl.cultivation.exception.WrongTicketException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -142,7 +141,7 @@ class ParkingBoyFacts {
 
         //when
         parkingBoy.parkCar(parkingLot, car);
-        Ticket errorTicket = new Ticket();
+        Ticket errorTicket = new Ticket(new Car(2));
 
         //then
         assertThrows(WrongTicketException.class, () -> parkingBoy.getCarByTicket(parkingLot, errorTicket));
