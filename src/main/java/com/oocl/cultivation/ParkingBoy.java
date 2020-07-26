@@ -4,11 +4,13 @@ import com.oocl.cultivation.exception.NotEnoughSeatException;
 import com.oocl.cultivation.exception.NullTicketException;
 import com.oocl.cultivation.exception.WrongTicketException;
 
+import java.util.List;
+
 public class ParkingBoy {
-    public Ticket parkCar(ParkingLot parkingLot, Car car) throws NotEnoughSeatException {
+    public Ticket parkCar(List<ParkingLot> parkingLots, Car car) throws NotEnoughSeatException {
         Ticket ticket = new Ticket(car);
-        if(parkingLot.getParkingCarMap().size()<10){
-            parkingLot.getParkingCarMap().put(ticket, car);
+        if(parkingLots.get(0).getParkingCarMap().size()<10){
+            parkingLots.get(0).getParkingCarMap().put(ticket, car);
         }else{
             throw new NotEnoughSeatException("Î»ÖÃ²»×ã");
         }
